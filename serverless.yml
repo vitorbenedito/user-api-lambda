@@ -1,10 +1,30 @@
-service: springboot-lambda
+service: springboot-lambda2
 
 provider:
   name: aws
   runtime: java8
+  stage: dev
+  region: us-east-2
+  cfLogs: true
   memorySize: 1536
   timeout: 60
+  vpc:
+      securityGroupIds:
+        - sg-e69f9d8f
+      subnetIds:
+        - subnet-cf9016b4
+        - subnet-ed99e184
+        - subnet-721ace3f
+  iamRoleStatements:
+    -  Effect: Allow
+       Action: 
+         - ec2:CreateNetworkInterface
+         - ec2:DescribeNetworkInterfaces
+         - ec2:DeleteNetworkInterface
+         - logs:CreateLogGroup
+         - logs:CreateLogStream
+         - logs:PutLogEvents
+       Resource: "*"
 
 package:
   artifact: build/distributions/springboot-lambda.zip

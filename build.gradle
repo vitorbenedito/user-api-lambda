@@ -6,6 +6,10 @@ plugins {
 apply plugin: 'groovy'
 apply plugin: 'org.springframework.boot'
 
+springBoot {
+	mainClass = "com.serverless.LambdaHandler"
+  }
+
 repositories {
   jcenter()
   mavenCentral()
@@ -19,7 +23,8 @@ dependencies {
       'org.codehaus.groovy:groovy-all:2.4.7',
       'com.amazonaws:aws-lambda-java-core:1.1.0',
       'com.amazonaws:aws-lambda-java-log4j:1.0.0',
-      'com.h2database:h2'
+	  'com.zaxxer:HikariCP:2.6.3',
+	  'mysql:mysql-connector-java:5.1.6'
   )
 
   // Use JUnit test framework
